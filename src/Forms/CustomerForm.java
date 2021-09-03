@@ -286,7 +286,7 @@ public class CustomerForm extends javax.swing.JFrame {
         jButton_delete.setBackground(new java.awt.Color(255, 255, 255));
         jButton_delete.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jButton_delete.setForeground(new java.awt.Color(34, 69, 80));
-        jButton_delete.setText("Delete User");
+        jButton_delete.setText("Delete Customer");
         jButton_delete.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton_delete.setOpaque(false);
         jButton_delete.addActionListener(new java.awt.event.ActionListener() {
