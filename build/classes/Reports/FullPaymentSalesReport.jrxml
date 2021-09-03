@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="55a5f613-c9d5-47b0-bf8b-2dd78078e606">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="FirstDate" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SecondDate" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     fullpayments.`invoice_id` AS fullpayments_invoice_id,
+     fullpayments.`sales_id` AS fullpayments_sales_id,
+     fullpayments.`date` AS fullpayments_date,
+     fullpayments.`time` AS fullpayments_time,
+     fullpayments.`total` AS fullpayments_total,
+     fullpayments.`payment` AS fullpayments_payment,
+     fullpayments.`balance` AS fullpayments_balance
+FROM
+     `fullpayments` fullpayments
+WHERE
+     fullpayments.`date` BETWEEN $P{FirstDate} AND $P{SecondDate}]]>
+	</queryString>
+	<field name="fullpayments_invoice_id" class="java.lang.Integer"/>
+	<field name="fullpayments_sales_id" class="java.lang.Integer"/>
+	<field name="fullpayments_date" class="java.sql.Date"/>
+	<field name="fullpayments_time" class="java.sql.Time"/>
+	<field name="fullpayments_total" class="java.lang.Double"/>
+	<field name="fullpayments_payment" class="java.lang.Double"/>
+	<field name="fullpayments_balance" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="72" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="1" width="802" height="20" uuid="032aceaf-5c2f-460e-bdc0-6abde1bcf370"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Full Payment Sales Report]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="41" width="41" height="20" uuid="fe9f0fcc-1f7c-4e0e-b5e0-333c993b86ab"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[To -]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="43" y="41" width="129" height="20" uuid="8237370a-61e0-496e-830c-ac91d5394f69"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{SecondDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="21" width="41" height="20" uuid="57414de7-400d-4ee1-8140-f864b64bacd1"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[From - ]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="43" y="21" width="129" height="20" uuid="8453d6d2-5b77-4c6d-a18c-bd06cfcfff3f"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FirstDate}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="33" splitType="Stretch">
+			<staticText>
+				<reportElement x="469" y="4" width="100" height="20" uuid="a73c6f59-4e6c-4b82-b778-77500727f380"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="588" y="4" width="100" height="20" uuid="158041b8-8835-4d0b-b143-21a47746b0b5"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Payment]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="347" y="4" width="100" height="20" uuid="3adf3d9d-5070-49b2-8b50-f266d41cf20f"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Time]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="231" y="4" width="100" height="20" uuid="2ee7ff20-bc06-45cd-965a-2cff46bf5cb7"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="115" y="4" width="100" height="20" uuid="64a5e6ff-e8f8-4b17-8c69-a081c35002c7"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sales ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="4" width="100" height="20" uuid="57a48736-c3b8-4fb5-91fc-98c06e42046c"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Invoice ID]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="28" width="802" height="1" uuid="09dab0f2-4932-4e8a-891b-71f32722f811"/>
+			</line>
+			<staticText>
+				<reportElement x="702" y="4" width="100" height="20" uuid="e61d3799-b82f-4c7c-baaa-d6e08c16f4a0"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Balance]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="26" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20" uuid="0bda5efc-c2d3-4c82-8e07-a382699de75f"/>
+				<textFieldExpression><![CDATA[$F{fullpayments_invoice_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="115" y="0" width="100" height="20" uuid="d2305815-3fb0-4615-bfd6-10b469e2c2ad"/>
+				<textFieldExpression><![CDATA[$F{fullpayments_sales_id}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="231" y="0" width="100" height="20" uuid="3150c7d5-d6bc-42ca-bb4a-36a81fc5e1c4"/>
+				<textFieldExpression><![CDATA[$F{fullpayments_date}]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH.mm.ss">
+				<reportElement x="347" y="0" width="100" height="20" uuid="ef088262-8949-40b8-aca3-2d7bcb2ec5bf"/>
+				<textFieldExpression><![CDATA[$F{fullpayments_time}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="469" y="0" width="100" height="20" uuid="82db0e6b-467a-4f18-b9c2-b9678847f867"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{fullpayments_total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="588" y="0" width="100" height="20" uuid="db77873f-44bd-47cd-b73b-ee79f49d0f33"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{fullpayments_payment}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="702" y="0" width="100" height="20" uuid="230cf9f5-1c29-4ced-9fca-7ef2ff7d6bf1"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{fullpayments_balance}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="2" y="23" width="802" height="1" uuid="361d79ae-5198-450c-97c2-1f150a12f217"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

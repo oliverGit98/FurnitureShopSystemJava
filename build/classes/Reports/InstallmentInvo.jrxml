@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="08a9f561-c4f6-4bfd-a7f4-4f17a79dd255">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="206"/>
+	<parameter name="InstallmentID" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     installments.`installment_id` AS installments_installment_id,
+     installments.`invoice_id` AS installments_invoice_id,
+     installments.`sales_id` AS installments_sales_id,
+     installments.`date` AS installments_date,
+     installments.`time` AS installments_time,
+     installments.`amount_applied` AS installments_amount_applied,
+     installments.`payment` AS installments_payment,
+     installments.`balance` AS installments_balance,
+     easypayment.`invoice_id` AS easypayment_invoice_id,
+     easypayment.`sales_id` AS easypayment_sales_id,
+     easypayment.`paymentplan` AS easypayment_paymentplan,
+     easypayment.`total` AS easypayment_total,
+     easypayment.`date` AS easypayment_date,
+     easypayment.`nxtdueDate` AS easypayment_nxtdueDate,
+     easypayment.`downPayment` AS easypayment_downPayment,
+     easypayment.`monthlyPayment` AS easypayment_monthlyPayment,
+     easypayment.`loan_amount` AS easypayment_loan_amount,
+     sales.`sales_id` AS sales_sales_id,
+     sales.`customer` AS sales_customer,
+     customer.`customer_id` AS customer_customer_id,
+     CONCAT(customer.`f_name`, " ", customer.`l_name`) AS customer_name
+FROM
+     `easypayment` easypayment INNER JOIN `installments` installments ON easypayment.`invoice_id` = installments.`invoice_id`
+     AND easypayment.`sales_id` = installments.`sales_id`
+     INNER JOIN `sales` sales ON easypayment.`sales_id` = sales.`sales_id`
+     INNER JOIN `customer` customer ON sales.`customer` = customer.`customer_id`
+WHERE
+     installments.`installment_id` = $P{InstallmentID}]]>
+	</queryString>
+	<field name="installments_installment_id" class="java.lang.Integer"/>
+	<field name="installments_invoice_id" class="java.lang.Integer"/>
+	<field name="installments_sales_id" class="java.lang.Integer"/>
+	<field name="installments_date" class="java.sql.Date"/>
+	<field name="installments_time" class="java.sql.Time"/>
+	<field name="installments_amount_applied" class="java.lang.Double"/>
+	<field name="installments_payment" class="java.lang.Double"/>
+	<field name="installments_balance" class="java.lang.Double"/>
+	<field name="easypayment_invoice_id" class="java.lang.Integer"/>
+	<field name="easypayment_sales_id" class="java.lang.Integer"/>
+	<field name="easypayment_paymentplan" class="java.lang.Integer"/>
+	<field name="easypayment_total" class="java.lang.Double"/>
+	<field name="easypayment_date" class="java.sql.Date"/>
+	<field name="easypayment_nxtdueDate" class="java.sql.Date"/>
+	<field name="easypayment_downPayment" class="java.lang.Double"/>
+	<field name="easypayment_monthlyPayment" class="java.lang.Double"/>
+	<field name="easypayment_loan_amount" class="java.lang.Double"/>
+	<field name="sales_sales_id" class="java.lang.Integer"/>
+	<field name="sales_customer" class="java.lang.Integer"/>
+	<field name="customer_customer_id" class="java.lang.Integer"/>
+	<field name="customer_name" class="java.lang.String"/>
+	<group name="Installments">
+		<groupExpression><![CDATA[$F{installments_installment_id}]]></groupExpression>
+		<groupFooter>
+			<band height="132">
+				<staticText>
+					<reportElement x="388" y="67" width="73" height="16" uuid="ff62500c-7e73-4fc8-8490-65bfadaf3170"/>
+					<textElement textAlignment="Right">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Balance]]></text>
+				</staticText>
+				<line>
+					<reportElement x="391" y="89" width="164" height="1" uuid="3e53f6d8-d721-4e1e-a5a0-c615fa7ae80e"/>
+					<graphicElement>
+						<pen lineWidth="2.0" lineStyle="Double"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="390" y="61" width="164" height="1" uuid="efacd447-c431-4ba2-bbb8-5ab7c2e792ff"/>
+				</line>
+				<staticText>
+					<reportElement x="367" y="20" width="96" height="16" uuid="fe5d0ec6-4ecf-4344-ae96-a65cebbe2f01"/>
+					<textElement textAlignment="Right">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Applied Amount]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="390" y="40" width="73" height="16" uuid="51845053-6dbb-47e6-838d-dd4d177fbae4"/>
+					<textElement textAlignment="Right">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Payment]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="476" y="20" width="76" height="16" uuid="c6df7211-35e2-4fa3-87f5-f6a0edd16b64"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{installments_amount_applied}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="476" y="40" width="77" height="16" uuid="1fdd022f-af2b-4598-9430-0469e212146e"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{installments_payment}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="476" y="67" width="76" height="16" uuid="bde1aeb7-ae89-48ef-b17f-8fd7d8f980ec"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{installments_balance}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="10" y="42" width="96" height="16" uuid="8dc74cc2-0ca7-471a-a324-33fa8426ffa5"/>
+					<textElement>
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Loan Amount]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="10" y="20" width="96" height="16" uuid="98dc5158-31fe-4074-9693-8e25918c453c"/>
+					<textElement>
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Monthly Payment]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="126" y="20" width="100" height="16" uuid="a1fbfa18-aac4-402b-a229-a43856a38632"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{easypayment_monthlyPayment}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="126" y="42" width="100" height="16" uuid="f5b1e8ab-4fde-498f-be98-489067d6adb6"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{easypayment_loan_amount}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="10" y="65" width="96" height="16" uuid="8e17ed8b-71f6-4d0f-9b0e-bafe3d6b5fa3"/>
+					<textElement>
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Next Payment Date]]></text>
+				</staticText>
+				<textField pattern="MMMMM dd, yyyy">
+					<reportElement x="126" y="65" width="136" height="16" uuid="c75b714f-fab6-41eb-a3a9-51c8d2afddb8"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{easypayment_nxtdueDate}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="250" splitType="Stretch">
+			<rectangle>
+				<reportElement x="1" y="1" width="555" height="67" uuid="cdb50d0f-a59c-4a08-9888-2f3e1a68d7de"/>
+				<graphicElement>
+					<pen lineWidth="1.75" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="1" y="2" width="555" height="20" uuid="f701ab42-acd0-472f-9f17-d041927d9691"/>
+				<textElement textAlignment="Center">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LAHIRU FURNITURES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="21" width="555" height="16" uuid="1e5b3c18-51b6-4ae7-8334-2bec30472a1c"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Labuduwa, Galle]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="37" width="555" height="16" uuid="43e1360e-8643-4ad8-b004-142bd671f45a"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[0775843987 / 0915843987]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="52" width="555" height="16" uuid="0c99237a-8a05-4a1a-901f-7afd5549bb2a"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[lahirufurnitures@gmail.com]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="129" width="66" height="16" uuid="7b77d3d5-0478-4094-92a4-5388b0410d8c"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Invoice No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="197" width="66" height="16" uuid="34699a69-aee4-4bce-bf3b-09517cbd37f2"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="151" width="66" height="16" uuid="2bbe76a9-210b-421a-bfdf-d1d7a6b66a32"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sales No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="83" width="130" height="16" uuid="4ee55ee1-b7a5-41b9-95a1-1aabfb79baae"/>
+				<textElement>
+					<font size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Installment Recipt]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="219" width="66" height="16" uuid="00e12241-a926-4f5c-b04c-c3fba08f54be"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Time]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="106" width="66" height="16" uuid="7d3e6b36-a77b-4fd6-958f-3a10932fbdab"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Installment ID]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="94" y="106" width="100" height="16" uuid="0fcb40dd-f9bb-442b-a6a6-017aafbfb601"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{installments_installment_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="94" y="129" width="100" height="16" uuid="ebe3627f-4c91-49c6-9bb8-a4f53c6602b7"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{installments_invoice_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="94" y="151" width="100" height="16" uuid="8becd613-1fb0-42f4-851f-3067eb9ae09e"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{installments_sales_id}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="94" y="197" width="132" height="16" uuid="29955427-2226-4b72-b5a3-6c6398b35a00"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{installments_date}]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH.mm.ss">
+				<reportElement x="94" y="219" width="100" height="16" uuid="2263e69f-9208-4171-8d6a-8b13eb2c19b2"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{installments_time}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="174" width="66" height="16" uuid="fce9bb23-ba08-40c2-9399-0c2229b4244e"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sales No]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="94" y="174" width="132" height="16" uuid="2b11e99b-b026-40a2-b95b-0a542656d466"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{customer_name}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="74" splitType="Stretch">
+			<staticText>
+				<reportElement x="2" y="49" width="552" height="25" uuid="cf2cdb5b-557d-4465-b49c-700efa314f3a"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Thank you! Come again!]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>
