@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1562422a-a88d-4962-be65-7ee0d08359f9">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="FirstDate" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SecondDate" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     sales.`sales_id` AS sales_sales_id,
+     sales.`sales_person` AS sales_sales_person,
+     sales.`customer` AS sales_customer,
+     sales.`payment_type` AS sales_payment_type,
+     sales.`date` AS sales_date,
+     sales.`time` AS sales_time,
+     sales.`total_amount` AS sales_total_amount
+FROM
+     `sales` sales
+WHERE
+     sales.`date` BETWEEN $P{FirstDate} AND $P{SecondDate}]]>
+	</queryString>
+	<field name="sales_sales_id" class="java.lang.Integer"/>
+	<field name="sales_sales_person" class="java.lang.Integer"/>
+	<field name="sales_customer" class="java.lang.Integer"/>
+	<field name="sales_payment_type" class="java.lang.String"/>
+	<field name="sales_date" class="java.sql.Date"/>
+	<field name="sales_time" class="java.sql.Time"/>
+	<field name="sales_total_amount" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="70" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="802" height="20" uuid="322b60ca-4b58-4cf6-9d08-07862780f852"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Sales Report]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="22" width="41" height="20" uuid="ad1aa910-8ca6-48c8-a94a-0c068de4fb88"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[From - ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="42" width="41" height="20" uuid="c629504d-04e6-45c2-bac7-e7ba06b7d33c"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[To -]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="41" y="22" width="129" height="20" uuid="b516057d-795b-4c88-bd04-ee762be3c0fb"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FirstDate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="41" y="42" width="129" height="20" uuid="50f09519-ba2a-4eaf-8487-0f2f2988b9b5"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{SecondDate}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="28" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" uuid="e311e2d7-48bb-480c-b066-cc11f553d9f2"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sales ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="115" y="0" width="100" height="20" uuid="937970d5-c670-431e-a075-8d1c240ddbf5"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sales Person]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="231" y="0" width="100" height="20" uuid="07f6273b-4a0c-40cb-9ce4-a9e50c154726"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Customer]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="347" y="0" width="100" height="20" uuid="2b7d5b92-7de8-40ff-bcd6-88482f3ae5fc"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Payment Type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="469" y="0" width="100" height="20" uuid="48b12096-47a7-4063-8d52-1f987915aa0d"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="588" y="0" width="100" height="20" uuid="fcc8a001-34b2-4bfa-bcd8-c59c2020f238"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Time]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="24" width="802" height="1" uuid="b455b64c-8019-4454-86fa-32c277e1c6f7"/>
+			</line>
+			<staticText>
+				<reportElement x="702" y="0" width="100" height="20" uuid="0296de9d-d75e-4fed-a3a5-b773bbfd8230"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Amount]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="33" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="6" width="100" height="20" uuid="0b5cd159-5b7a-41b0-8bb3-c83a27c9f8b5"/>
+				<textFieldExpression><![CDATA[$F{sales_sales_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="115" y="6" width="100" height="20" uuid="12ec746d-c578-4ad7-9a7f-48219840b5a8"/>
+				<textFieldExpression><![CDATA[$F{sales_sales_person}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="231" y="6" width="100" height="20" uuid="b2c3bd7e-0df4-433a-8884-5491d0041c48"/>
+				<textFieldExpression><![CDATA[$F{sales_customer}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="347" y="6" width="100" height="20" uuid="b55fd594-f151-47d3-b158-3bedba5e6134"/>
+				<textFieldExpression><![CDATA[$F{sales_payment_type}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="469" y="6" width="100" height="20" uuid="c27fd726-6ea3-4cba-812b-e1ff5e480761"/>
+				<textFieldExpression><![CDATA[$F{sales_date}]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH.mm.ss">
+				<reportElement x="588" y="6" width="100" height="20" uuid="853de824-3fcb-47d7-a1fe-bc752dea8594"/>
+				<textFieldExpression><![CDATA[$F{sales_time}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="702" y="5" width="100" height="20" uuid="16a6f06d-9dde-4981-aa8a-856b7a9fece3"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{sales_total_amount}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="28" width="802" height="1" uuid="3f4d68f0-4eff-4abb-b674-46180e94881b"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,579 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6ba104ea-c9ad-4eb6-b9be-e5cc3c8f7e31">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="325"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFBFBF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<parameter name="SalesID" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     sales.`sales_id` AS sales_sales_id,
+     sales.`sales_person` AS sales_sales_person,
+     sales.`customer` AS sales_customer,
+     sales.`date` AS sales_date,
+     sales.`time` AS sales_time,
+     sales.`total_amount` AS sales_total_amount,
+     salesproducts.`salesP_id` AS salesproducts_salesP_id,
+     salesproducts.`sales_id` AS salesproducts_sales_id,
+     salesproducts.`product_id` AS salesproducts_product_id,
+     salesproducts.`r_price` AS salesproducts_r_price,
+     salesproducts.`ws_price` AS salesproducts_ws_price,
+     salesproducts.`qty` AS salesproducts_qty,
+     salesproducts.`total` AS salesproducts_total,
+     products.`product_id` AS products_product_id,
+     products.`title` AS products_title,
+     products.`name` AS products_name,
+     easypayment.`invoice_id` AS easypayment_invoice_id,
+     easypayment.`sales_id` AS easypayment_sales_id,
+     easypayment.`paymentplan` AS easypayment_paymentplan,
+     easypayment.`total` AS easypayment_total,
+     easypayment.`date` AS easypayment_date,
+     easypayment.`nxtdueDate` AS easypayment_nxtdueDate,
+     easypayment.`downPayment` AS easypayment_downPayment,
+     easypayment.`monthlyPayment` AS easypayment_monthlyPayment,
+     easypayment.`loan_amount` AS easypayment_loan_amount,
+     paymentplan.`plan_id` AS paymentplan_plan_id,
+     paymentplan.`name` AS paymentplan_name,
+     paymentplan.`Months` AS paymentplan_Months,
+     paymentplan.`interest` AS paymentplan_interest,
+     paymentplan.`description` AS paymentplan_description,
+     installments.`installment_id` AS installments_installment_id,
+     installments.`invoice_id` AS installments_invoice_id,
+     installments.`sales_id` AS installments_sales_id,
+     installments.`date` AS installments_date,
+     installments.`time` AS installments_time,
+     installments.`amount_applied` AS installments_amount_applied,
+     installments.`payment` AS installments_payment,
+     installments.`balance` AS installments_balance,
+     customer.`customer_id` AS customer_customer_id,
+     CONCAT(customer.`f_name`, " ", customer.`l_name`) AS customer_name,
+     customer.`gender` AS customer_gender,
+     customer.`mobile` AS customer_mobile,
+     customer.`address_id` AS customer_address_id,
+     customer.`nic` AS customer_nic,
+     address.`address_id` AS address_address_id,
+     CONCAT(address.`address_line1`, " , ", address.`address_line2`) AS address_address_line1,
+     CONCAT(address.`city`, " , ", address.`state`) AS address_city
+FROM
+     `sales` sales INNER JOIN `salesproducts` salesproducts ON sales.`sales_id` = salesproducts.`sales_id`
+     INNER JOIN `products` products ON salesproducts.`product_id` = products.`product_id`
+     INNER JOIN `easypayment` easypayment ON sales.`sales_id` = easypayment.`sales_id`
+     INNER JOIN `customer` customer ON sales.`customer` = customer.`customer_id`
+     INNER JOIN `address` address ON customer.`address_id` = address.`address_id`
+     INNER JOIN `paymentplan` paymentplan ON easypayment.`paymentplan` = paymentplan.`plan_id`
+     INNER JOIN `installments` installments ON easypayment.`invoice_id` = installments.`invoice_id`
+WHERE
+     sales.`sales_id` = $P{SalesID}]]>
+	</queryString>
+	<field name="sales_sales_id" class="java.lang.Integer"/>
+	<field name="sales_sales_person" class="java.lang.Integer"/>
+	<field name="sales_customer" class="java.lang.Integer"/>
+	<field name="sales_date" class="java.sql.Date"/>
+	<field name="sales_time" class="java.sql.Time"/>
+	<field name="sales_total_amount" class="java.lang.Double"/>
+	<field name="salesproducts_salesP_id" class="java.lang.Integer"/>
+	<field name="salesproducts_sales_id" class="java.lang.Integer"/>
+	<field name="salesproducts_product_id" class="java.lang.Integer"/>
+	<field name="salesproducts_r_price" class="java.lang.Double"/>
+	<field name="salesproducts_ws_price" class="java.lang.Double"/>
+	<field name="salesproducts_qty" class="java.lang.Integer"/>
+	<field name="salesproducts_total" class="java.lang.Double"/>
+	<field name="products_product_id" class="java.lang.Integer"/>
+	<field name="products_title" class="java.lang.String"/>
+	<field name="products_name" class="java.lang.String"/>
+	<field name="easypayment_invoice_id" class="java.lang.Integer"/>
+	<field name="easypayment_sales_id" class="java.lang.Integer"/>
+	<field name="easypayment_paymentplan" class="java.lang.Integer"/>
+	<field name="easypayment_total" class="java.lang.Double"/>
+	<field name="easypayment_date" class="java.sql.Date"/>
+	<field name="easypayment_nxtdueDate" class="java.sql.Date"/>
+	<field name="easypayment_downPayment" class="java.lang.Double"/>
+	<field name="easypayment_monthlyPayment" class="java.lang.Double"/>
+	<field name="easypayment_loan_amount" class="java.lang.Double"/>
+	<field name="paymentplan_plan_id" class="java.lang.Integer"/>
+	<field name="paymentplan_name" class="java.lang.String"/>
+	<field name="paymentplan_Months" class="java.lang.Integer"/>
+	<field name="paymentplan_interest" class="java.lang.Integer"/>
+	<field name="paymentplan_description" class="java.lang.String"/>
+	<field name="installments_installment_id" class="java.lang.Integer"/>
+	<field name="installments_invoice_id" class="java.lang.Integer"/>
+	<field name="installments_sales_id" class="java.lang.Integer"/>
+	<field name="installments_date" class="java.sql.Date"/>
+	<field name="installments_time" class="java.sql.Time"/>
+	<field name="installments_amount_applied" class="java.lang.Double"/>
+	<field name="installments_payment" class="java.lang.Double"/>
+	<field name="installments_balance" class="java.lang.Double"/>
+	<field name="customer_customer_id" class="java.lang.Integer"/>
+	<field name="customer_name" class="java.lang.String"/>
+	<field name="customer_gender" class="java.lang.String"/>
+	<field name="customer_mobile" class="java.lang.String"/>
+	<field name="customer_address_id" class="java.lang.Integer"/>
+	<field name="customer_nic" class="java.lang.String"/>
+	<field name="address_address_id" class="java.lang.Integer"/>
+	<field name="address_address_line1" class="java.lang.String"/>
+	<field name="address_city" class="java.lang.String"/>
+	<group name="EasyPayment">
+		<groupExpression><![CDATA[$F{sales_sales_id}]]></groupExpression>
+		<groupFooter>
+			<band height="151">
+				<staticText>
+					<reportElement x="392" y="12" width="72" height="16" uuid="5f9e7959-e25e-4e7e-a8ac-22e86421dcf4"/>
+					<textElement textAlignment="Right">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="483" y="12" width="72" height="16" uuid="f4eab09c-b308-475c-94dc-d81f90fb910b"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{sales_total_amount}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="392" y="30" width="72" height="16" uuid="bbb27782-00dc-49b9-9779-fd8a11bd8337"/>
+					<textElement textAlignment="Right">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Down Payment]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="483" y="30" width="72" height="16" uuid="7943f326-f21a-4a82-8e9f-6ac584ff18b2"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{easypayment_downPayment}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="392" y="49" width="72" height="16" uuid="b71dfebb-cae1-4cb2-bd80-7b131d476a7d"/>
+					<textElement textAlignment="Right">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Loan Amount]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="483" y="49" width="72" height="16" uuid="c99da16b-d4a9-41b6-8eb3-374868f8ed55"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{easypayment_loan_amount}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="392" y="69" width="72" height="16" uuid="aa92a25c-3560-47a6-a744-7b9971e1bdcd"/>
+					<textElement textAlignment="Right">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Net Total]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="483" y="69" width="72" height="16" uuid="e5841b7e-3e03-40cf-81a6-aa3cb2058950"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{easypayment_total}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="392" y="89" width="72" height="16" uuid="1adfbed2-a35f-46e5-8572-760c3e7c923c"/>
+					<textElement textAlignment="Right">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Payment]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="483" y="89" width="72" height="16" uuid="58209b4b-5345-4884-ba51-17b7564335be"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{installments_payment}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="392" y="115" width="72" height="16" uuid="9b487264-5e5d-4e27-911c-7d236b5c5072"/>
+					<textElement textAlignment="Right">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Balance]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="483" y="115" width="72" height="16" uuid="2734333c-b470-4ed5-a236-39a031db2d23"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{installments_balance}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="392" y="110" width="163" height="1" uuid="cf0a112d-e269-40a6-b816-0524bf791fc3"/>
+				</line>
+				<line>
+					<reportElement x="392" y="137" width="163" height="1" uuid="73d9db99-c323-4485-8eed-afb6b204527b"/>
+					<graphicElement>
+						<pen lineWidth="2.0" lineStyle="Double"/>
+					</graphicElement>
+				</line>
+				<rectangle>
+					<reportElement x="168" y="12" width="195" height="93" uuid="7089b6dc-daab-4faf-97d3-a741d74d46a8"/>
+				</rectangle>
+				<staticText>
+					<reportElement x="176" y="15" width="100" height="16" uuid="84d9fbca-8577-492c-b664-1f9e22392985"/>
+					<textElement>
+						<font size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Payment Plan Details]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="176" y="33" width="67" height="16" uuid="1decf7af-1133-47f0-be6f-560d1f7493c9"/>
+					<textElement>
+						<font size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Plan]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="263" y="33" width="86" height="13" uuid="de24b05d-ba3d-453a-9de7-fceca4af970a"/>
+					<textElement>
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{paymentplan_name}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="176" y="53" width="67" height="16" uuid="5944419a-97c6-48e5-bbf9-29a563a7063d"/>
+					<textElement>
+						<font size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Interst Rate ]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="263" y="53" width="86" height="16" uuid="ab8b5b1e-d7b3-47cf-a388-7897ded6282a"/>
+					<textElement>
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{paymentplan_interest}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="176" y="73" width="85" height="16" uuid="da98fbbe-0f1b-4301-815e-e6b9b75c292a"/>
+					<textElement>
+						<font size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Monthly Payment]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="263" y="73" width="86" height="16" uuid="5ed91f11-9f89-4f88-9c52-9399bcf3716f"/>
+					<textElement>
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{easypayment_monthlyPayment}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="224" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="1" width="555" height="67" uuid="83e07d84-7836-400b-89bb-e7e410b6e9a0"/>
+				<graphicElement>
+					<pen lineWidth="1.75" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="1" width="555" height="20" uuid="620261f0-87cd-4902-9725-b33ba6ba8f32"/>
+				<textElement textAlignment="Center">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LAHIRU FURNITURES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="22" width="555" height="16" uuid="94c93ca7-b355-4666-8876-bd0d5121f5d5"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Labuduwa, Galle]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="37" width="555" height="16" uuid="9bf1f936-adc5-49c6-9721-755f4d02b04e"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[0775843987 / 0915843987]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="52" width="555" height="16" uuid="19d8e497-99c5-4d0b-a6ed-a3110e519905"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[lahirufurnitures@gmail.com]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="380" y="87" width="173" height="110" uuid="80cc33d6-5a1f-45c4-ab9c-4a98600242cf"/>
+			</rectangle>
+			<textField>
+				<reportElement x="390" y="170" width="164" height="16" uuid="9c6dcb45-d13a-494a-a088-48eaec775c52"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{customer_mobile}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="390" y="103" width="163" height="16" uuid="ab2343e6-9d49-4aef-8e42-2166ae8f547c"/>
+				<textElement textAlignment="Justified">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{customer_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="390" y="136" width="164" height="16" uuid="d739fd22-0a04-45aa-8df0-9b4dc85d4425"/>
+				<textElement textAlignment="Justified">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{address_address_line1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="390" y="152" width="164" height="16" uuid="159fe6c2-9d68-49e8-b9aa-b2c680ff3d88"/>
+				<textElement textAlignment="Justified"/>
+				<textFieldExpression><![CDATA[$F{address_city}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="390" y="87" width="88" height="16" uuid="bfb6fffb-ce9f-43b0-b0bc-341a64568c93"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Customer Details]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="12" y="102" width="66" height="16" uuid="ea7c6d43-3416-4413-bb35-e2394a3ff1f4"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Invoice No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="12" y="124" width="66" height="16" uuid="f514220b-81a2-4091-8b74-be931ae6b69d"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sales No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="12" y="146" width="66" height="16" uuid="584f3591-8938-4198-833f-aaf41990421f"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="12" y="168" width="66" height="16" uuid="619768dc-d4aa-4f41-9b5d-45a235957298"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Time]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="105" y="102" width="100" height="16" uuid="6cc8f421-0df6-480d-b08a-3773f3f0e0b1"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{easypayment_invoice_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="105" y="124" width="100" height="16" uuid="edb32b99-8260-4aab-9635-79296253c135"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{easypayment_sales_id}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="105" y="146" width="100" height="16" uuid="2495509b-f79d-41e3-bd3a-2f589e5de035"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{easypayment_date}]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH.mm.ss">
+				<reportElement x="105" y="168" width="100" height="16" uuid="ef54626f-2c67-4277-b3c3-fc3e576bdb0f"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sales_time}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="390" y="119" width="100" height="16" uuid="d1f41d2e-f75e-40ee-867c-7d4af0e66793"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{customer_nic}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="12" y="75" width="156" height="16" uuid="f44d25cf-2df1-4140-b02c-797c285afb50"/>
+				<textElement>
+					<font size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Easy Payment Invoice]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="26" splitType="Stretch">
+			<staticText>
+				<reportElement x="294" y="2" width="55" height="16" uuid="6a630720-7fd6-43ef-9f2d-293fd058e63b"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Unit Price]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="68" y="2" width="100" height="16" uuid="84b7593c-58ad-4d58-94db-c5b5e2c43f14"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Title]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="2" width="55" height="16" uuid="88f370e7-4237-47ed-9c9a-2c240ab74704"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Product ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="483" y="2" width="72" height="16" uuid="117f73d7-8c5e-4797-b995-489b50bab84e"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="359" y="2" width="55" height="16" uuid="54d1a304-51ff-4fa4-8373-643375e969e9"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[WS Price]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="426" y="2" width="38" height="16" uuid="6002a5dc-72cd-4a2e-aec9-933972ba2d94"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[QTY]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="182" y="2" width="100" height="16" uuid="1e7bfc59-a664-4bec-8967-1fbf7bbea14d"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Name]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="27" splitType="Stretch">
+			<textField>
+				<reportElement x="294" y="4" width="55" height="15" uuid="f3b97fd8-54ef-41d5-b0de-741c67c2b47d"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{salesproducts_r_price}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="359" y="4" width="55" height="15" uuid="0911bcc6-fe2b-40ad-bde3-81205fbdb444"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{salesproducts_ws_price}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="426" y="4" width="38" height="15" uuid="a0c79558-ad44-4b12-88cd-d3d67b629ba3"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{salesproducts_qty}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="68" y="4" width="100" height="15" uuid="6c9a2297-2a17-48ee-beaa-123c2a128ba9"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{products_title}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="483" y="4" width="72" height="15" uuid="fce9d547-9788-47ec-9467-cc5db298ed48"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{salesproducts_total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="4" width="55" height="15" uuid="addecf6c-c574-4b67-8149-30d45b105bec"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{salesproducts_product_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="182" y="4" width="100" height="15" uuid="e736e1b4-c30f-43cc-a836-84d8a351dda7"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{products_name}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="22" width="555" height="1" uuid="e32654fd-f88b-402c-b421-9d4e111fb760"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="97" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="69" width="552" height="25" uuid="5f647cc8-e753-41c6-a2b4-477813709980"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Thank you! Come again!]]></text>
+			</staticText>
+			<line>
+				<reportElement x="240" y="22" width="117" height="1" uuid="e19d364c-ea8f-41d4-ae2e-949e181caf24"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="240" y="30" width="117" height="16" uuid="174bc38c-0737-4f6a-8e0c-5100b6b260b5"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Manager]]></text>
+			</staticText>
+			<line>
+				<reportElement x="43" y="23" width="117" height="1" uuid="b4d21389-6ade-4c44-a70e-e0266994150f"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="43" y="30" width="117" height="16" uuid="b8da815f-9051-48a7-a5f8-6b176b7353be"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Customer Signature]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

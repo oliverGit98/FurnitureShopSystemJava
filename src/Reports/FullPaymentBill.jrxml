@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d2fef204-9eca-484c-84fe-e39406fb98d1">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="205"/>
+	<parameter name="SalesID" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     sales.`sales_id` AS sales_sales_id,
+     sales.`customer` AS sales_customer,
+     sales.`date` AS sales_date,
+     sales.`time` AS sales_time,
+     salesproducts.`salesP_id` AS salesproducts_salesP_id,
+     salesproducts.`sales_id` AS salesproducts_sales_id,
+     salesproducts.`product_id` AS salesproducts_product_id,
+     salesproducts.`r_price` AS salesproducts_r_price,
+     salesproducts.`ws_price` AS salesproducts_ws_price,
+     salesproducts.`qty` AS salesproducts_qty,
+     salesproducts.`total` AS salesproducts_total,
+     products.`product_id` AS products_product_id,
+     products.`title` AS products_title,
+     products.`name` AS products_name,
+     fullpayments.`invoice_id` AS fullpayments_invoice_id,
+     fullpayments.`sales_id` AS fullpayments_sales_id,
+     fullpayments.`date` AS fullpayments_date,
+     fullpayments.`time` AS fullpayments_time,
+     fullpayments.`total` AS fullpayments_total,
+     fullpayments.`payment` AS fullpayments_payment,
+     fullpayments.`balance` AS fullpayments_balance,
+     customer.`customer_id` AS customer_customer_id,
+     CONCAT(customer.`f_name`, " ", customer.`l_name`) AS customer_name,
+     customer.`mobile` AS customer_mobile,
+     customer.`address_id` AS customer_address_id,
+     address.`address_id` AS address_address_id,
+     CONCAT(address.`address_line1`, " , ", address.`address_line2`) AS address_address_line1,
+     CONCAT(address.`city`, " , ", address.`state`) AS address_city
+FROM
+     `sales` sales INNER JOIN `salesproducts` salesproducts ON sales.`sales_id` = salesproducts.`sales_id`
+     INNER JOIN `products` products ON salesproducts.`product_id` = products.`product_id`
+     INNER JOIN `fullpayments` fullpayments ON sales.`sales_id` = fullpayments.`sales_id`
+     INNER JOIN `customer` customer ON sales.`customer` = customer.`customer_id`
+     INNER JOIN `address` address ON customer.`address_id` = address.`address_id`
+WHERE
+     sales.`sales_id` = $P{SalesID}]]>
+	</queryString>
+	<field name="sales_sales_id" class="java.lang.Integer"/>
+	<field name="sales_customer" class="java.lang.Integer"/>
+	<field name="sales_date" class="java.sql.Date"/>
+	<field name="sales_time" class="java.sql.Time"/>
+	<field name="salesproducts_salesP_id" class="java.lang.Integer"/>
+	<field name="salesproducts_sales_id" class="java.lang.Integer"/>
+	<field name="salesproducts_product_id" class="java.lang.Integer"/>
+	<field name="salesproducts_r_price" class="java.lang.Double"/>
+	<field name="salesproducts_ws_price" class="java.lang.Double"/>
+	<field name="salesproducts_qty" class="java.lang.Integer"/>
+	<field name="salesproducts_total" class="java.lang.Double"/>
+	<field name="products_product_id" class="java.lang.Integer"/>
+	<field name="products_title" class="java.lang.String"/>
+	<field name="products_name" class="java.lang.String"/>
+	<field name="fullpayments_invoice_id" class="java.lang.Integer"/>
+	<field name="fullpayments_sales_id" class="java.lang.Integer"/>
+	<field name="fullpayments_date" class="java.sql.Date"/>
+	<field name="fullpayments_time" class="java.sql.Time"/>
+	<field name="fullpayments_total" class="java.lang.Double"/>
+	<field name="fullpayments_payment" class="java.lang.Double"/>
+	<field name="fullpayments_balance" class="java.lang.Double"/>
+	<field name="customer_customer_id" class="java.lang.Integer"/>
+	<field name="customer_name" class="java.lang.String"/>
+	<field name="customer_mobile" class="java.lang.String"/>
+	<field name="customer_address_id" class="java.lang.Integer"/>
+	<field name="address_address_id" class="java.lang.Integer"/>
+	<field name="address_address_line1" class="java.lang.String"/>
+	<field name="address_city" class="java.lang.String"/>
+	<group name="Sales">
+		<groupExpression><![CDATA[$F{sales_sales_id}]]></groupExpression>
+		<groupFooter>
+			<band height="116">
+				<textField>
+					<reportElement x="483" y="10" width="72" height="16" uuid="e7ff2eb2-6068-4308-ba55-f97569aa97bc"/>
+					<textElement textAlignment="Right">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{fullpayments_total}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="483" y="30" width="72" height="16" uuid="4484409e-91a7-469c-80fe-f8a634184674"/>
+					<textElement textAlignment="Right">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{fullpayments_payment}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="483" y="57" width="72" height="16" uuid="a397cd32-d95c-43ce-9bb6-70de4dffaf69"/>
+					<textElement textAlignment="Right">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{fullpayments_balance}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="391" y="10" width="73" height="16" uuid="c7c490d2-dd9e-4906-a29f-8fa2d055b9dc"/>
+					<textElement textAlignment="Right">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Net Total]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="391" y="30" width="73" height="16" uuid="aba81be5-1923-44e3-9bb3-172f36168674"/>
+					<textElement textAlignment="Right">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Payment]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="391" y="57" width="73" height="16" uuid="69a39848-dc3d-4874-84bd-31d4d73227fe"/>
+					<textElement textAlignment="Right">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Balance]]></text>
+				</staticText>
+				<line>
+					<reportElement x="391" y="51" width="164" height="1" uuid="30e959bf-fb9b-4d4c-962c-ae3dbaa18a28"/>
+				</line>
+				<line>
+					<reportElement x="391" y="79" width="164" height="1" uuid="dcd86e7f-3c3c-4863-85ce-e2de79b96951"/>
+					<graphicElement>
+						<pen lineWidth="2.0" lineStyle="Double"/>
+					</graphicElement>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="204" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="67" uuid="14bdf91c-2ae9-4930-818e-5a8b01415be0"/>
+				<graphicElement>
+					<pen lineWidth="1.75" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="20" uuid="5c790d6a-5f2e-45ba-af66-373a70fa3998"/>
+				<textElement textAlignment="Center">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LAHIRU FURNITURES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="21" width="555" height="16" uuid="fc8d5455-c599-4a2c-a323-987ae54f8b49"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Labuduwa, Galle]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="36" width="555" height="16" uuid="58e4901e-d48b-4936-afc0-1877792f6b90"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[0775843987 / 0915843987]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="51" width="555" height="16" uuid="6d4ccdda-8ef3-4ac7-8c79-7dd738c6715b"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[lahirufurnitures@gmail.com]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="99" width="66" height="16" uuid="0fd94aeb-a262-4215-9e5b-a1b0715ebe12"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Invoice No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="121" width="66" height="16" uuid="1cf5af41-95b4-47ec-8994-38d06fe184bc"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sales No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="143" width="66" height="16" uuid="557ec218-847c-4b0a-a624-fe0e3be695b3"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="165" width="66" height="16" uuid="46ae5de2-d169-40bb-9f8e-5ad5a8c6cc53"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Time]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="80" y="99" width="117" height="16" uuid="13ed3143-0b79-4ef6-a008-81a29a643900"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fullpayments_invoice_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="121" width="117" height="16" uuid="5e93c151-0378-4d33-bef7-720fe35f6bb4"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fullpayments_sales_id}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="80" y="143" width="117" height="16" uuid="f7096399-d79f-4188-a6e1-68ccc878db12"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fullpayments_date}]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH.mm.ss">
+				<reportElement x="80" y="165" width="117" height="16" uuid="043fb10b-ffc2-4031-8641-a1b24a5dbdab"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fullpayments_time}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="381" y="83" width="173" height="100" uuid="7db383d2-a7a4-46cb-827c-eb056ca458b6"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="391" y="83" width="88" height="16" uuid="86b00adb-8302-4a0e-9eba-27d868cebedf"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Customer Details]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="391" y="99" width="163" height="16" uuid="4e26d26e-d08d-401e-b22b-8e99953a72d3"/>
+				<textElement textAlignment="Justified">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{customer_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="391" y="152" width="164" height="16" uuid="ad3aee71-bcff-4bec-8089-a8d056c61d39"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{customer_mobile}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="391" y="134" width="164" height="16" uuid="4a3f223a-d941-4b59-92db-e1f93c561cdd"/>
+				<textElement textAlignment="Justified"/>
+				<textFieldExpression><![CDATA[$F{address_city}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="391" y="118" width="164" height="16" uuid="19a79664-bbdd-4a25-a699-4652c6ca5aeb"/>
+				<textElement textAlignment="Justified">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{address_address_line1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="75" width="130" height="16" uuid="95c5a40a-3320-4926-9950-544686d4f7e5"/>
+				<textElement>
+					<font size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Full Payment Invoice]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="55" height="16" uuid="251c4aac-6c60-42d1-90f7-d188579ebb44"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Product ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="68" y="0" width="100" height="16" uuid="183ac97f-2b0a-41d9-a51c-72bc27f54eb6"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Title]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="182" y="0" width="100" height="16" uuid="15654e95-c827-4bb7-8e24-d113ff7cde9a"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="294" y="0" width="55" height="16" uuid="4c966e57-f557-4a17-9d37-9078c1895a38"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Unit Price]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="359" y="0" width="55" height="16" uuid="6f58dc43-0920-43c3-9cda-74952ef0d0d9"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[WS Price]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="426" y="0" width="38" height="16" uuid="8de65388-a300-4419-8a45-e86aaa705f57"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[QTY]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="483" y="0" width="72" height="16" uuid="ef3b8b16-cbb7-4ade-8e1d-eb08ca8b4ea8"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="55" height="15" uuid="2c74cf4a-7cfb-4d02-936b-b56fb4c544d1"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{salesproducts_product_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="68" y="0" width="100" height="15" uuid="704ca22f-49ec-4074-8dae-c3423aad3ad4"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{products_title}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="182" y="0" width="100" height="15" uuid="1fc23821-bda1-49ec-8fec-b164449ce85b"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{products_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="294" y="0" width="55" height="15" uuid="46cbe8cd-4555-4e22-8d09-7678e3aaa3ed"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{salesproducts_r_price}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="359" y="0" width="55" height="15" uuid="af0d2761-0830-46a3-aaa6-311e032f9526"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{salesproducts_ws_price}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="426" y="0" width="38" height="15" uuid="6c3fa6ef-9ee5-4124-b91e-83d577c9b4ed"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{salesproducts_qty}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="483" y="0" width="72" height="15" uuid="ab047e5e-6793-4f29-851a-1f045d8553e8"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{salesproducts_total}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="19" width="555" height="1" uuid="3a806139-2b28-4e7c-a799-8f9c3329ee43"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="81" splitType="Stretch">
+			<line>
+				<reportElement x="45" y="10" width="117" height="1" uuid="656d5d32-a792-40ff-a14f-346b5526cf5c"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="45" y="17" width="117" height="16" uuid="e7c0cb68-7628-45fa-8f0d-9ef683dd5f34"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Customer Signature]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="242" y="17" width="117" height="16" uuid="fc084f50-f55d-43c5-800b-c9cee922f37d"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Manager]]></text>
+			</staticText>
+			<line>
+				<reportElement x="242" y="9" width="117" height="1" uuid="2f261bd0-1978-4083-9cf7-5e8f20d750a2"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="3" y="56" width="552" height="25" uuid="8d19a82e-69cc-4578-802a-d218d4d45714"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Thank you! Come again!]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

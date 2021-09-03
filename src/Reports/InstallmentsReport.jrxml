@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="edd13eb8-da96-4c0d-875e-5292ea69c1ea">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="FirstDate" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SecondDate" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     installments.`installment_id` AS installments_installment_id,
+     installments.`invoice_id` AS installments_invoice_id,
+     installments.`sales_id` AS installments_sales_id,
+     installments.`date` AS installments_date,
+     installments.`time` AS installments_time,
+     installments.`amount_applied` AS installments_amount_applied,
+     installments.`payment` AS installments_payment,
+     installments.`balance` AS installments_balance
+FROM
+     `installments` installments
+WHERE
+    installments.`date` BETWEEN $P{FirstDate} AND $P{SecondDate}]]>
+	</queryString>
+	<field name="installments_installment_id" class="java.lang.Integer"/>
+	<field name="installments_invoice_id" class="java.lang.Integer"/>
+	<field name="installments_sales_id" class="java.lang.Integer"/>
+	<field name="installments_date" class="java.sql.Date"/>
+	<field name="installments_time" class="java.sql.Time"/>
+	<field name="installments_amount_applied" class="java.lang.Double"/>
+	<field name="installments_payment" class="java.lang.Double"/>
+	<field name="installments_balance" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="73" splitType="Stretch">
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="43" y="22" width="129" height="20" uuid="3ad67471-e915-4568-b095-fce7a60a45a9"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FirstDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="41" width="41" height="20" uuid="09a5f70c-6f81-4060-9296-1735f939a8bc"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[To -]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="43" y="42" width="129" height="20" uuid="13167afb-70e7-498d-b86e-e8a09042b365"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{SecondDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="21" width="41" height="20" uuid="1409d82d-462a-4a3f-8bd3-89240dedb5dc"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[From - ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="2" width="802" height="20" uuid="65a329c0-c8c5-4d77-8372-76cafc21200e"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Installments Report]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="28" splitType="Stretch">
+			<staticText>
+				<reportElement x="705" y="1" width="97" height="20" uuid="453c330f-d130-445d-8042-e9cd654a0071"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Balance]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="85" y="1" width="75" height="20" uuid="e4221b57-9c27-4f1f-ac91-344f8ce27ebb"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Invoice]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="485" y="1" width="97" height="20" uuid="b4e436c7-01e1-431c-8398-2fd2d8feebf8"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Applied Amount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="261" y="1" width="100" height="20" uuid="4f55bed6-4386-41d2-ac3d-52e1349b006d"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="594" y="1" width="97" height="20" uuid="9566356c-9575-4081-9bd1-fa2b4b9ced0a"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Payment]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="1" width="74" height="20" uuid="5d27ca4c-6129-4794-bfb4-5d042c9a61f5"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Installment No]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="25" width="802" height="1" uuid="dff531ec-714c-4b1a-af85-9f1fa7bfbf9a"/>
+			</line>
+			<staticText>
+				<reportElement x="172" y="1" width="77" height="20" uuid="be863d87-5b1e-418d-812a-b29c4b80eaa0"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sales ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="373" y="1" width="100" height="20" uuid="cd30eaf2-6544-4609-9020-bb3028db430f"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Time]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="26" splitType="Stretch">
+			<textField>
+				<reportElement x="2" y="0" width="72" height="20" uuid="6bbf265b-d93d-467e-a997-47422f1da0d2"/>
+				<textFieldExpression><![CDATA[$F{installments_installment_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="85" y="0" width="75" height="20" uuid="e0d702b7-17d3-42c4-9190-f8a196066637"/>
+				<textFieldExpression><![CDATA[$F{installments_invoice_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="172" y="0" width="77" height="20" uuid="1c5aa79e-cd15-483c-9a92-8e7696666316"/>
+				<textFieldExpression><![CDATA[$F{installments_sales_id}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="261" y="0" width="100" height="20" uuid="e57cee00-be1d-4050-8d43-a07e310dc033"/>
+				<textFieldExpression><![CDATA[$F{installments_date}]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH.mm.ss">
+				<reportElement x="373" y="0" width="100" height="20" uuid="a99d1107-64bd-468c-8885-a849269d7320"/>
+				<textFieldExpression><![CDATA[$F{installments_time}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="485" y="0" width="97" height="20" uuid="b66e09d8-48cb-407b-934c-264642302b5b"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{installments_amount_applied}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="594" y="0" width="97" height="20" uuid="604aa19f-5636-4ff6-96e3-d5eef4b4860e"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{installments_payment}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="705" y="0" width="97" height="20" uuid="73de0d10-73f9-4751-b51d-76513f8eb162"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{installments_balance}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="22" width="802" height="1" uuid="c3a9dd43-7b2b-456d-9073-8cceaacb47bc"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
